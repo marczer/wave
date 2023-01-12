@@ -1,47 +1,34 @@
 import 'package:flutter/material.dart';
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key});
+class myhomepage extends StatefulWidget {
+  const myhomepage({super.key});
 
   @override
-  State<MyHomePage> createState() => _MyHomePageState();
+  State<myhomepage> createState() => _myhomepageState();
 }
 
-// bool _obscureText = true;
 bool _obscureSolde = true;
 String solde = '1.500 F';
 
-class _MyHomePageState extends State<MyHomePage> {
+class _myhomepageState extends State<myhomepage> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        appBar: AppBar(
-          elevation: 0,
-          backgroundColor: const Color.fromARGB(255, 71, 73, 205),
-          leading: const Icon(Icons.settings),
-        ),
-        body: SingleChildScrollView(
-            child: Column(
-          children: [
-            Container(
-              width: double.infinity,
-              height: 200,
-              color: const Color.fromARGB(255, 71, 73, 205),
-              child: Stack(
+    return  Scaffold(
+      body: CustomScrollView(
+        slivers: <Widget>[
+          SliverAppBar(
+            //  floating: true,
+             pinned: true,
+            expandedHeight: 100,
+            backgroundColor: const Color.fromARGB(255, 71, 73, 205),
+            leading: const Icon(Icons.settings),
+            flexibleSpace: FlexibleSpaceBar(
+              centerTitle: true,
+              title: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      RichText(
-                        text: TextSpan(
-                          text: solde,
-                          style: const TextStyle(
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 30,
-                          ),
-                        ),
-                      ),
+                  Text(solde,style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,),),
                       IconButton(
                         onPressed: () {
                           setState(() {
@@ -58,31 +45,47 @@ class _MyHomePageState extends State<MyHomePage> {
                           _obscureSolde
                               ? Icons.visibility_off
                               : Icons.visibility,
-                          color: Colors.white,
+                          color: Colors.white,size: 20,
                         ),
                       ),
                       // const TransactionSection(),
-                    ],
-                  ),
-                  Positioned(
-                    left: 0,
-                    right: 0,
-                    top: 50,
-                    child: Container(
-                      alignment: Alignment.center,
-                      margin: const EdgeInsets.only(top: 80),
-                      height: 100,
+                ],
+              ),
+            ),
+          ),
+         SliverToBoxAdapter(
+          child: 
+          Column(
+            children: [
+              Column(
+                children: [
+                  Stack(
+                    children: [
+                      Container(
+                        height: 200,
+                        color: const Color.fromARGB(255, 71, 73, 205),
+                      ),
+                      Positioned(
+                        left: 0,
+                        right: 0,
+                        bottom: -70,
+                        top: 0,
+                        child: Container(
+                       alignment: Alignment.center,
+                       margin: const EdgeInsets.only(top: 80),
+                       height: 50,
                       // width:  414,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(20),
                         color: Colors.white,
-                      ),
-                      // child: Container(),
+                        ),
+                       )
                     ),
-                  ),
-                  Positioned(
-                      right: 50,
-                      bottom: 10,
+                    Positioned(
+                      left: 0,
+                      right: 0,
+                      // right: 50,
+                      bottom: 50,
                       child: Container(
                         alignment: Alignment.center,
                         child: Image.asset(
@@ -90,70 +93,79 @@ class _MyHomePageState extends State<MyHomePage> {
                           width: 300,
                           height: 150,
                         ),
-                      )),
+                      )
+                    ),
+                  ],
+                 )
                 ],
               ),
-            ),
-            Container(
+              Container(
               // width: 250,
-              color: Colors.white,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
+               decoration: BoxDecoration(
+                  borderRadius: BorderRadius.only(topLeft: Radius.circular(20), ),
+                  color: Colors.white,
+                ),
+              child: Column(
                 children: [
-                  Column(
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
-                      Container(
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(100),
-                            color: const Color.fromARGB(255, 223, 230, 255),
-                          ),
-                          width: 70,
-                          height: 70,
-                          margin: const EdgeInsets.only(bottom: 5),
-                          padding: const EdgeInsets.all(15),
-                          child: const Icon(Icons.person)),
-                      const Text(
-                        'Transfert',
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 15,
-                        ),
-                      )
-                    ],
-                  ),
-                  Column(
-                    children: [
-                      Container(
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(100),
-                            color: const Color.fromARGB(255, 223, 230, 255),
-                          ),
-                          width: 70,
-                          height: 70,
-                          margin: const EdgeInsets.only(bottom: 5),
-                          padding: const EdgeInsets.all(15),
-                          child: const Icon(Icons.shopping_bag)),
-                      const Text(
-                        'Paiements',
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 15,
-                        ),
-                      )
+                      Column(
+                        children: [
+                          Container(
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(100),
+                                color: const Color.fromARGB(255, 223, 230, 255),
+                              ),
+                              width: 70,
+                              height: 70,
+                              margin: const EdgeInsets.only(bottom: 5),
+                              padding: const EdgeInsets.all(15),
+                              child: const Icon(Icons.person)),
+                          const Text(
+                            'Transfert',
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 15,
+                            ),
+                          )
+                        ],
+                      ),
+                      Column(
+                        children: [
+                          Container(
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(100),
+                                color: const Color.fromARGB(255, 223, 230, 255),
+                              ),
+                              width: 70,
+                              height: 70,
+                              margin: const EdgeInsets.only(bottom: 5),
+                              padding: const EdgeInsets.all(15),
+                              child: const Icon(Icons.shopping_bag)),
+                          const Text(
+                            'Paiements',
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 15,
+                            ),
+                          )
+                        ],
+                      ),
                     ],
                   ),
                 ],
               ),
             ),
-            Container(
+              Container(
               color: const Color.fromARGB(255, 241, 241, 241),
               height: 10,
-            ),
-            Container(
+              ),
+              Container(
               color: Colors.white,
               child: SingleChildScrollView(
                 child: Column(
-                  children: List.filled(20, 0)
+                  children: List.filled(20, 5)
                       .map(
                         (e) => const ListTile(
                           title: Text(
@@ -176,7 +188,11 @@ class _MyHomePageState extends State<MyHomePage> {
                 ),
               ),
             ),
-          ],
-        )));
+            ],
+          ),
+         )
+        ],
+      ),
+    );
   }
 }
