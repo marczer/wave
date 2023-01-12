@@ -7,7 +7,7 @@ class myhomepage extends StatefulWidget {
   State<myhomepage> createState() => _myhomepageState();
 }
 
-bool _obscureSolde = true;
+bool _obscureSolde = false;
 String solde = '1.500 F';
 
 class _myhomepageState extends State<myhomepage> {
@@ -18,20 +18,24 @@ class _myhomepageState extends State<myhomepage> {
         slivers: <Widget>[
           SliverAppBar(
             //  floating: true,
-             pinned: true,
+            pinned: true,
             expandedHeight: 100,
             backgroundColor: const Color.fromARGB(255, 71, 73, 205),
             leading: const Icon(Icons.settings),
             flexibleSpace: FlexibleSpaceBar(
               centerTitle: true,
-              title: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Text(solde,style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,),),
-                      IconButton(
-                        onPressed: () {
-                          setState(() {
+              title: InkWell(
+                           child: Row(
+                             mainAxisAlignment: MainAxisAlignment.center,
+                            children:  [
+                              Text(solde,style:  TextStyle(color: Colors.white,fontWeight: FontWeight.bold,),),
+                              SizedBox(width: 10,),
+                              Icon(_obscureSolde ? Icons.visibility_off: Icons.visibility,color: Colors.white,size: 20,
+                              ),
+                            ],
+                          ),
+                          onTap: () {
+                            setState(() {
                             if (_obscureSolde == true) {
                               solde = '1.500 F';
                               _obscureSolde = false;
@@ -40,17 +44,10 @@ class _myhomepageState extends State<myhomepage> {
                               _obscureSolde = true;
                             }
                           });
-                        },
-                        icon: Icon(
-                          _obscureSolde
-                              ? Icons.visibility_off
-                              : Icons.visibility,
-                          color: Colors.white,size: 20,
-                        ),
-                      ),
-                      // const TransactionSection(),
-                ],
-              ),
+                          },
+                    splashColor: Colors.transparent,
+                    highlightColor: Colors.transparent,
+                  )
             ),
           ),
          SliverToBoxAdapter(
@@ -101,7 +98,7 @@ class _myhomepageState extends State<myhomepage> {
               ),
               Container(
               // width: 250,
-               decoration: BoxDecoration(
+               decoration: const BoxDecoration(
                   borderRadius: BorderRadius.only(topLeft: Radius.circular(20), ),
                   color: Colors.white,
                 ),
